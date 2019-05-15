@@ -55,9 +55,10 @@ TweenMax.staggerFrom(".article", 1, {
 }, 0.2)
 
 
-
+//======================SUBMIT FORM===============================//
 const submitBtn = document.querySelector(".submit");
 submitBtn.addEventListener("click", event => {
+
   const heading = document.querySelector('input');
   const content = document.querySelector('textarea');
   const pArray = content.textContent.split('\n').filter(paragraph => paragraph !== '');
@@ -69,8 +70,25 @@ submitBtn.addEventListener("click", event => {
   h2.textContent = heading.textContent;
   newArticle.appendChild(h2);
 
+
+  const date = document.createElement('p');
+  date.setAttribute('class', 'date')
+  const options = {month: "long", day: "numeric", year: "numeric"};
+  date.textContent = new Date().toLocaleDateString(en-US, options);
+  newArticle.appendChild(date);
+
   let p;
   pArray.forEach(paragraph => {
-    
-  })
+    p = document.createElement('p');
+    p.textContent = paragraph;
+    newArticle.appendChild(p);
+  });
+
+  const button = document.createElement('span');
+  button.setAttribute('class', 'expandButton');
+  newArticle.appendChild(button);
+
+  const allArticles = document.querySelector('.articles');
+  allArticles.appendChild(newArticle);
+  new Article(newArticle);
 })
