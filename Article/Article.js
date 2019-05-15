@@ -21,10 +21,11 @@ class Article {
 
   expandArticle() {
     // Using our reference to the domElement, toggle a class to expand or hide the article.
-    if (this.expandButton.textConent == "expand") {
-      this.domElement.classList.toggle('article-open');
-      this.expandButton.textConent = "collapse";
-    } else {console.log('noooo')}
+    this.domElement.style.transition = "height, 1s";
+    this.domElement.classList.toggle('article-open');
+    if (this.expandButton.textContent == "expand") {
+      this.expandButton.textContent = "collapse";
+    } else {this.expandButton.textContent = "expand";}
   }
 }
 
@@ -44,14 +45,12 @@ articles.forEach(art => new Article(art))
 
 
 
+
 //===========TWEEN ANIMATION FOR ARTICLES===============//
 
-// TweenMax.staggerFrom(".article", 1, {
-//   opacity: 0,
-//   x: -400,
-//   delay: 0.5
-// }, 0.2)
+TweenMax.staggerFrom(".article", 1, {
+  opacity: 0,
+  x: -400,
+  delay: 0.5
+}, 0.2)
 
-
-
-//===========ARTICLE OPEN TWEEN===============//
