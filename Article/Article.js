@@ -41,6 +41,8 @@ let articles = document.querySelectorAll('.article');
 
 articles.forEach(art => new Article(art))
 
+
+
 //===========================STRETCH=================================//
 
 
@@ -58,25 +60,35 @@ TweenMax.staggerFrom(".article", 1, {
 //======================SUBMIT FORM===============================//
 const submitBtn = document.querySelector(".submit");
 submitBtn.addEventListener("click", event => {
+  event.preventDefault(); //Prevents loading of page
 
+
+  //Assigning some values from the form
   const heading = document.querySelector('input');
   const content = document.querySelector('textarea');
-  const pArray = content.textContent.split('\n').filter(paragraph => paragraph !== '');
+  const pArray = content.value.split('\n').filter(paragraph => paragraph !== '');
 
+
+  //Creating new article div
   const newArticle = document.createElement('div');
   newArticle.classList.add('article');
 
+
+  //Creating header and applying text
   const h2 = document.createElement('h2');
-  h2.textContent = heading.textContent;
+  h2.textContent = String(heading.value);
   newArticle.appendChild(h2);
 
 
+  //Creating date with proper formatting
   const date = document.createElement('p');
   date.setAttribute('class', 'date')
   const options = {month: "long", day: "numeric", year: "numeric"};
-  date.textContent = new Date().toLocaleDateString(en-US, options);
+  date.textContent = new Date().toLocaleDateString("en-US", options);
   newArticle.appendChild(date);
 
+
+  //Creating paragraphs and applying text
   let p;
   pArray.forEach(paragraph => {
     p = document.createElement('p');
@@ -84,10 +96,14 @@ submitBtn.addEventListener("click", event => {
     newArticle.appendChild(p);
   });
 
+
+  //Creating empty span (will receive text after passing through constructor)
   const button = document.createElement('span');
   button.setAttribute('class', 'expandButton');
   newArticle.appendChild(button);
 
+
+  //Appending the new article into the full 'articles' div, and running the article through the constructor
   const allArticles = document.querySelector('.articles');
   allArticles.appendChild(newArticle);
   new Article(newArticle);
