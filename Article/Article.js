@@ -54,3 +54,23 @@ TweenMax.staggerFrom(".article", 1, {
   delay: 0.5
 }, 0.2)
 
+
+
+const submitBtn = document.querySelector(".submit");
+submitBtn.addEventListener("click", event => {
+  const heading = document.querySelector('input');
+  const content = document.querySelector('textarea');
+  const pArray = content.textContent.split('\n').filter(paragraph => paragraph !== '');
+
+  const newArticle = document.createElement('div');
+  newArticle.classList.add('article');
+
+  const h2 = document.createElement('h2');
+  h2.textContent = heading.textContent;
+  newArticle.appendChild(h2);
+
+  let p;
+  pArray.forEach(paragraph => {
+    
+  })
+})
